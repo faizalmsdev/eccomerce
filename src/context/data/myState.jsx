@@ -1,17 +1,23 @@
+import { useState } from "react";
 import MyContext from "./myContext"; // step 1 import context
 
-    function myState(props) { // create my state function
-        const state = { // creating a new state to pass it
-            name:"Faizal Mohamed",
-            rollno : 21
+    function MyState(props) { // create my state function
+        const [mode,setMode] = useState('light'); //creating for dark mode
+        
+        const toggleMode = () =>{
+            if(mode === 'light'){
+                setMode('dark');
+                document.body.style.backgroundColor = 'rgb(17,24,39)';
+            } else {
+                setMode ('light');
+                document.body.style.backgroundColor = 'white';
+            }
         }
-
-        const color = "red";
         return (
-            <MyContext.Provider value={{state,color}}>  {/*using provider passing state to all the components*/}
+            <MyContext.Provider value={{mode , toggleMode}}>  {/*using provider passing state to all the components*/}
                 {props.children}
             </MyContext.Provider>
         )
     }
 
-    export default myState
+    export default MyState
